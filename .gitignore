@@ -1,0 +1,4 @@
+.venv/
+airflow/
+.ipynb_checkpoints/
+.idea/
