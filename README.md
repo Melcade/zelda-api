@@ -21,6 +21,7 @@ Install the following dependencies in your virtual environment:
 pip install pandas
 pip install matplotlib
 pip install requests
+pip install seaborn
 ```
 
 Note: Because of limited time, this was done pragmatically. In the future, adding a `requirements.txt` file or
@@ -78,7 +79,7 @@ pip install jupyterlab
 
 ### Start JupyterLab and open task solutions
 Start JupyterLab with the following command in the virtual environment:
-``sh
+```sh
 jupyter lab
 ```
 
