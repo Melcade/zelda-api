@@ -24,7 +24,7 @@ def zelda_dag():
             response = requests.get(url=f"https://zelda.fanapis.com/api/" + endpoint + "?page=" + str(page)).json()
         return data
 
-    @task # task for creating the sql schema of the database
+    @task  # task for creating the sql schema of the database
     def create_schema():
         con = sqlite3.connect(database)
         cursor = con.cursor()
@@ -67,7 +67,7 @@ def zelda_dag():
         con = sqlite3.connect(database)
         cursor = con.cursor()
         data = [(s["id"], s["name"]) for s in staff]
-        cursor.executemany("REPLACE INTO staff VALUES (?, ?)", data) # SQL template, data
+        cursor.executemany("REPLACE INTO staff VALUES (?, ?)", data)  # SQL template, data
 
         for employee in staff:
             for game in employee["worked_on"]:
@@ -81,7 +81,7 @@ def zelda_dag():
         con = sqlite3.connect(database)
         cursor = con.cursor()
         data = [(m["id"], m["name"], m["description"]) for m in monsters]
-        cursor.executemany("REPLACE INTO monster VALUES (?, ?, ?)", data) # SQL template, data
+        cursor.executemany("REPLACE INTO monster VALUES (?, ?, ?)", data)  # SQL template, data
 
         for m in monsters:
             for game in m["appearances"]:
@@ -106,12 +106,12 @@ def zelda_dag():
         con.commit()
         con.close()
 
-    @task_group # task group for the first tasks of the workflow
+    @task_group  # task group for the first tasks of the workflow
     def get_and_insert_games():
         games = get_games()
         insert_games(games)
 
-    @task_group # task group for the following tasks
+    @task_group  # task group for the following tasks
     def get_and_insert_staff_monsters_items():
         staff = get_staff()
         insert_staff(staff)

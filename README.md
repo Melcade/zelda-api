@@ -36,8 +36,6 @@ CONSTRAINT_URL="https://raw.githubusercontent.com/apache/airflow/constraints-${A
 pip install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}"
 ```
 
-Other dependencies are listed in the `requirements.txt` file.
-
 ### Run Airflow using project as home directory
 ```sh
 NO_PROXY="*" AIRFLOW_HOME="$(pwd)/airflow" airflow standalone
@@ -61,6 +59,11 @@ within the project folder (if `AIRFLOW_HOME` was set correctly).
 To remove the example content / templates, change the `airflow/airflow.cfg` file and set the
 value for `load_examples` to `False`.
 
+The example content is created on the first run, to finally remove it, run the following command:
+```sh
+NO_PROXY="*" AIRFLOW_HOME="$(pwd)/airflow" airflow db reset
+```
+
 ### Move DAGs folder to project level
 By default, Airflow uses the `dags` folder within the `AIRFLOW_HOME` directory. However, to be able to
 add the `AIRFLOW_HOME` directory to the `.gitignore` file, it is recommended to move the `dags` folder outside
@@ -71,6 +74,13 @@ for `dags_folder` to `dags` on project level, example:
 ```
 /Users/melissa/zelda-api/dags
 ```
+### Complete Airflow workflow visualized as a graph
+
+If all steps have been executed successfully, the zelda_dag should now be visible in the Airflow interface. As soon as 
+it is switched on and running, you can control its workflow. The entire Airflow workflow is shown in the graph view. 
+The dag including the various tasks and the order of execution is visualized here.
+
+![Airflow_overview](doc/airflow_overview.png)
 
 ### Install JupyterLab
 ```sh
@@ -82,5 +92,22 @@ Start JupyterLab with the following command in the virtual environment:
 ```sh
 jupyter lab
 ```
+[JupyterLab](https://jupyter.org) is the latest web-based interactive development for notebooks, code and data.
+The flexible interface helps us to execute various SQL queries.
+
+### Sample JupyterLab application to execute SQL queries 
+
+![JupyterLab_sql_query](doc/jupyterlab_example_1.png)
+
+Documentation: https://docs.jupyter.org/en/latest/
+
+### Visualization the results
+[Seaborn](https://seaborn.pydata.org) is a Python data visualization library based on 
+[matplotlib](https://matplotlib.org). It provides a high-level interface for drawing attractive and informative 
+statistical graphics. In this example we used it to visualize our result. A bar chart has been created.
+
+![JupyterLab_sql_query_2](doc/jupyterlab_example_2.png)
+
+Documentation: https://seaborn.pydata.org/installing.html
 
 The solutions for the tasks are located in the `zelda.ipynb` notebook.
